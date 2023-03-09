@@ -1,0 +1,133 @@
+# C++
+
+## Introduction
+
+AS with most programming languages we begin by creating and deconstructing a simple "`Hello World!`" program.
+
+This is done in `C++` as follows:
+
+**Filename: `hello.cpp`**
+
+```c++
+#include <iostream>
+
+int main ( int argc, char** argv)
+{
+    std::cout <<"Hello world!\n";
+    return 0;
+}
+```
+
+To run this program will print the message `Hello world!` followed by a new line.
+
+The snippet is broken down as follows
+
+* `#include` is a preprocessor directive to insert the file specified thereafter, in the above case that is `iostream`
+* `iostream` is a standard header file that defines various input/ output (I/O) types
+* `int main` is the entry point for execution of a `C++` program
+  
+    > **📝 Note**
+    >
+    > Main is required in **every** `C++` program
+
+* `std::cout` is the standard output stream which may correspond to a terminal, console, file, or something user specified.
+* `<<` is the output operator
+* `"Hello wolrd!\n"` is the message that is pushed to the output stream
+
+    > **📝 Note**
+    >
+    > It is helpful to read the `std::cout <<"Hello world!\n";` command form right to left instead.
+    > This would then read as:
+    > Take `"Hello world!\n"` and output it `>>` to the `std::cout` standard output stream.
+    >
+    > *The arrows were flipped to help with readability*
+
+## Manually Compiling and building of programs
+
+This is generally quite tedious, especially when the program consists of multiple source files and additional compiler options need to be specified. Therefore in practice we use tools to automate the build process such as a `CMake` or `Make`.
+
+To compile this program we call `g++ -c file_name` where "`-c`" means
+*"compile only (DO NOT LINK)"*
+
+```bash
+    g++ -c hello.cpp
+```
+
+This will generate a compiled output file with the same name but a "`.o`" file extension. In this case called `hello.o`.
+
+Opening this file will look like gibberish with lots of different unknown characters since it is object code
+
+To be able to use and run this code we need to link it. This produces an executable.
+
+Linking is done with the command `g++ -o executable file_name1.o file_name2.o ...` where "`-o executable`" means *"use **`executable`** for output."*. therefore running the command below,
+
+```bash
+    g++ -o hello hello.o
+```
+
+will generate am executable file called **`hello`**.
+
+Running the executable will open a terminal session and output"
+
+```bash
+{path/to/exectuable/file}; exit;
+{...}
+hello-world/hello ; exit;
+Hello world! # <-- Here is the output! 
+
+Saving session...
+...copying shared history...
+...saving history...truncating history files...
+...completed.
+Deleting expired sessions...none found.
+
+[Process completed]
+```
+
+## GNU Compiler Collection - GCC
+
+The above commands to compile and link are provided through GCC or the "GNU Compiler Collection" one of the most popular `C++` compilers.
+
+### 📚 GCC Resources
+
+📕 [GCC Website](http://www.gnu.org/software/gcc)  
+📗 [C++ standards support in GCC](https://gcc.gnu.org/projects/cxx-status.html)
+
+### GCC Commands
+
+The `g++` command provides both compiling and linking functionality through
+
+```css #Note CSS used here to style line online its actually bash.
+    g++ [options] input_file ...
+```
+
+Some useful `[options]` and commands are listed in the table below.
+
+| GCC Options | Purpose |
+| :---| :---|
+| `-c`                          | Compile only (do not link)   |
+| `-o` *file*                   | Use file *file* for output   |
+| `-g`                          | Include debugging information|
+| `-O`*n*                       | Set optimization level to *n* (`0` almost none; `3` full) |
+| `-std=c++20`                  | Conform to C++ 20 standard    |
+| `-I`*dir*                     | Specify additional directory *dir* to search for include files    |
+| `-L`*dir*                     | Specify additional directory *dir* to search for libraries        |
+| `-l`*lib*                     | Link with library *lib*       |
+| `-pthread`                    | Enable concurrency support (via *pthreads* library )   |
+| `-pedantic-errors`            | Strictly enforce compliance with standard   |
+| `-Wall`                       | Enable **most** warning messages   |
+| `-Wextra`                     | Enable some **extra** warning messages not enabled by `-Wall`   |
+| `-Wpedantic`                  | Warn about deviations from strict standard compliance  |
+| `-Werror`                     | Treat all warnings as errors   |
+| `-fno-elide-constructors`     | In contexts where standard allows (but does not require) optimization that omits creation of temporary, **do not attempt to perform this optimization**   |
+| `-fconstexpr-loop-limit=`*n*  | Set maximum number of iterations for loop in `constexpr` functions to *n*   |
+| `fconstexpr-depth=`*n*        | Set maximum nested evaluation depth for `constexpr` functions to *n*  |
+
+## Clang C++ Compiler
+
+`Clang++` is another popular c++ compiler it supports many of the same command-line commands as gcc g++
+
+### 📚 Clang Resources
+
+📕 [Clang Website](http://clang.llvm.org)  
+📗 [C++ standards support in Clang](http://clang.llvm.org/cxx_status.html)
